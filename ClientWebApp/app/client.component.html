@@ -1,0 +1,20 @@
+﻿<h2>My clients</h2>
+<ul class="clients">
+    <li *ngFor="let client of clients" (click)="onSelect(client)" [class.selected]="client === selectedClient">
+        <span class="client-element">
+            <span class="badge">{{client.id}}</span> {{client.name}}
+        </span>
+        <button class="delete-button" (click)="deleteClient(client, $event)">Delete</button>
+    </li>
+</ul>
+<div class="error" *ngIf="error">{{error}}</div>
+<button (click)="addClient()">Add New Client</button>
+<div *ngIf="addingClient">
+    <client-detail (close)="close($event)"></client-detail>
+</div>
+<div *ngIf="selectedClient">
+    <h2>
+        {{selectedClient.name | uppercase}} is my client
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+</div>
